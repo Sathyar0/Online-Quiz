@@ -4,100 +4,94 @@
   <title>Quiz</title>
   <style>
     /* CSS styles for the quiz website */
-
-    /* Global styles */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      margin: 0;
+      background-color: #f5f5f5;
     }
-
-    /* Quiz container */
-    #quiz-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
+    
+    h1 {
+      text-align: center;
     }
-
-    /* Question styles */
-    .question {
+    
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 20px;
     }
-
+    
+    .logo {
+      width: 100px;
+      height: auto;
+      margin-right: 10px;
+    }
+    
+    .question {
+      margin-bottom: 20px;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
     .question p {
       font-weight: bold;
     }
-
+    
     .question ul {
       list-style-type: none;
       padding: 0;
     }
-
+    
     .question li {
       margin-bottom: 5px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
-
-    .question .options {
-      display: flex;
-      flex-direction: column;
+    
+    .question li:hover {
+      background-color: #f5f5f5;
     }
-
+    
     .question .options label {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
+      display: block;
+      cursor: pointer;
     }
-
+    
     .question .options input[type="radio"] {
       display: none;
     }
-
-    .question .options .option-label {
-      flex: 1;
-      padding: 10px 20px;
-      border: 1px solid #ccc;
-      cursor: pointer;
+    
+    .question .options input[type="radio"]:checked + label {
+      background-color: #4caf50;
+      color: #fff;
     }
-
-    .question .options .option-label:hover,
-    .question .options .option-label.selected {
-      background-color: #ccc;
-    }
-
-    /* Submit button */
+    
     .submit-button {
       text-align: center;
       margin-top: 20px;
     }
-
+    
     .submit-button button {
-      font-size: 18px;
+      font-size: 20px;
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
+      border-radius: 5px;
       cursor: pointer;
-    }
-
-    /* Media queries for responsive design */
-    @media screen and (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-
-      #quiz-container {
-        max-width: none;
-        padding: 10px;
-      }
-
-      .submit-button button {
-        font-size: 16px;
-      }
     }
   </style>
 </head>
 <body>
-  <h1 style="text-align: center;">Quiz</h1>
+  <div class="quiz-header">
+    <img class="logo" src="https://images.jdmagicbox.com/comp/chennai/p5/044pxx44.xx44.190503104139.w8p5/catalogue/apzem-india-engineering-tirumullaivayal-chennai-industrial-blower-dealers-jl1xi4l2rh.jpg?temp=1" alt="Logo">
+    <h1>Quiz</h1>
+  </div>
   <div id="quiz-container"></div>
   <div class="submit-button">
     <button onclick="submitQuiz()">Submit</button>
