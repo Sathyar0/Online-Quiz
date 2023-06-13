@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Result</title>
+  <style>
+    /* CSS styles for the result page */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+     
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    .result {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz Result</h1>
+  <div class="result">
+    <script>
+      // Retrieve the score and total from the URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const score = urlParams.get('score');
+      const total = urlParams.get('total');
+
+      // Display the score and total on the webpage
+      document.write(`Your score: ${score}/${total}`);
+    </script>
+  </div>
+</body>
+</html>
