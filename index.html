@@ -3,89 +3,92 @@
 <head>
   <title>Quiz</title>
   <style>
-    /* CSS styles for the quiz website */
-    body {
-      background-image: url('https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/6/2021_6$largeimg_2068541034.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image file */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-    }
-    
-    h1 {
-      text-align: center;
-    }
-    
-    .quiz-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    
-    .logo {
-      width: 250px;
-      height: auto;
-     
-    }
-    
-    .question {
-      margin-bottom: 20px;
-      background-color: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    .question p {
-      font-weight: bold;
-    }
-    
-    .question ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    
-    .question li {
-      margin-bottom: 5px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .question li:hover {
-      background-color: #f5f5f5;
-    }
-    
-    .question .options label {
-      display: block;
-      cursor: pointer;
-    }
-    
-    .question .options input[type="radio"] {
-      display: none;
-    }
-    
-    .question .options input[type="radio"]:checked + label {
-      background-color: #4caf50;
-      color: #fff;
-    }
-    
-    .submit-button {
-      text-align: center;
-      margin-top: 20px;
-    }
-    
-    .submit-button button {
-      font-size: 30px;
-      padding: 20px 100px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+  /* CSS styles for the quiz website */
+  body {
+    background-image: url('https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/6/2021_6$largeimg_2068541034.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    width: 250px;
+    height: auto;
+  }
+
+  .question {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.7); /* Transparent background */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #000000; /* Set the text color to black */
+  }
+
+  .question p {
+    font-weight: bold;
+    color: #000000; /* Set the text color to black */
+  }
+
+  .question ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .question li {
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .question li:hover {
+    background-color: #f5f5f5;
+  }
+
+  .question .options label {
+    display: block;
+    cursor: pointer;
+  }
+
+  .question .options input[type="radio"] {
+    display: none;
+  }
+
+  .question .options input[type="radio"]:checked + label {
+    background-color: #4caf50;
+    color: #fff;
+  }
+
+  .submit-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .submit-button button {
+    font-size: 30px;
+    padding: 20px 100px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
   <div class="quiz-header">
