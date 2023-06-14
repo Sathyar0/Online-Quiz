@@ -7,21 +7,78 @@
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-     
+      margin: 0;
+      background-image: url("https://wallpapercave.com/wp/wp2974930.jpg"); /* Replace with your desired background image URL */
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    
+    .top-image {
+      display: block;
+      width: 100%;
+      height: 200px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
     
     h1 {
       text-align: center;
+      margin-top: 320px;
+      font-size: 42px; /* Updated font size */
+      color: black; /* Text color set to black */
     }
     
     .result {
       text-align: center;
-      font-size: 24px;
+      font-size: 28px; /* Updated font size */
+      color: black; /* Text color set to black */
       margin-top: 50px;
+    }
+    
+    .bottom-image {
+      display: block;
+      width: 100%;
+      height: 160px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+    }
+    
+    /* Media queries for responsive layout */
+    @media only screen and (max-width: 768px) {
+      h1 {
+        margin-top: 200px;
+        font-size: 36px; /* Updated font size */
+      }
+      
+      .result {
+        font-size: 24px; /* Updated font size */
+      }
+    }
+    
+    @media only screen and (max-width: 480px) {
+      h1 {
+        margin-top: 150px;
+        font-size: 30px; /* Updated font size */
+      }
+      
+      .result {
+        font-size: 22px; /* Updated font size */
+      }
+      
+      .bottom-image {
+        height: 120px;
+      }
     }
   </style>
 </head>
 <body>
+  <img src="https://media.licdn.com/dms/image/C5616AQGumwNVOiMhhQ/profile-displaybackgroundimage-shrink_200_800/0/1630996461419?e=2147483647&v=beta&t=q1QmrFhSXmwPUxyF25HFHw9ja3wnoTyTQd9njj36b2o" alt="Top Image" class="top-image">
   <h1>Quiz Result</h1>
   <div class="result">
     <script>
@@ -34,5 +91,6 @@
       document.write(`Your score: ${score}/${total}`);
     </script>
   </div>
+  <img src="https://www.apzem.com/images1/other/Nox-Sox-Voc-Dust-Fume-control.png" alt="Bottom Image" class="bottom-image">
 </body>
 </html>
