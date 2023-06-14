@@ -155,10 +155,10 @@
           <h3>Question ${index + 1}:</h3>
           <p>${question.question}</p>
           <ul class="options">
-            ${question.options.map((option, optionIndex) => `
+            ${question.options.map(option => `
               <li onclick="selectOption(${index}, '${option}')">
-                <input type="radio" name="answer-${index}" value="${option}" id="answer-${index}-${optionIndex}">
-                <label for="answer-${index}-${optionIndex}">${String.fromCharCode(65 + optionIndex)}. ${option}</label>
+                <input type="radio" name="answer-${index}" value="${option}" id="answer-${index}-${option}">
+                <label for="answer-${index}-${option}">${option}</label>
               </li>
             `).join('')}
           </ul>
