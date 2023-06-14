@@ -3,102 +3,106 @@
 <head>
   <title>Quiz</title>
   <style>
-  /* CSS styles for the quiz website */
-  body {
-    background-image: url('https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
+    /* CSS styles for the quiz website */
+    body {
+      background-image: url('https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
 
-  h1 {
-    text-align: center;
-  }
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  .quiz-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+    .logo {
+      width: 250px;
+      height: auto;
+    }
 
-  .logo {
-    width: 250px;
-    height: auto;
-  }
+    .question {
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.7); /* Transparent background */
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      color: #000000; /* Set the text color to black */
+    }
 
-  .question {
-    margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.7); /* Transparent background */
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #000000; /* Set the text color to black */
-  }
+    .question p {
+      font-weight: bold;
+      color: #000000; /* Set the text color to black */
+    }
 
-  .question p {
-    font-weight: bold;
-    color: #000000; /* Set the text color to black */
-  }
+    .question ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-  .question ul {
-    list-style-type: none;
-    padding: 0;
-  }
+    .question li {
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-  .question li {
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+    .question li:hover {
+      background-color: #f5f5f5;
+    }
 
-  .question li:hover {
-    background-color: #f5f5f5;
-  }
+    .question .options label {
+      display: block;
+      cursor: pointer;
+    }
 
-  .question .options label {
-    display: block;
-    cursor: pointer;
-  }
+    .question .options input[type="radio"] {
+      display: none;
+    }
 
-  .question .options input[type="radio"] {
-    display: none;
-  }
+    .question .options input[type="radio"]:checked + label {
+      background-color: #4caf50;
+      color: #fff;
+    }
 
-  .question .options input[type="radio"]:checked + label {
-    background-color: #4caf50;
-    color: #fff;
-  }
+    .submit-button {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-  .submit-button {
-    text-align: center;
-    margin-top: 20px;
-  }
+    .submit-button button {
+      font-size: 30px;
+      padding: 20px 100px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-  .submit-button button {
-    font-size: 30px;
-    padding: 20px 100px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-</style>
+    .timer {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
   <div class="quiz-header">
     <img class="logo" src="https://images.jdmagicbox.com/comp/chennai/p5/044pxx44.xx44.190503104139.w8p5/catalogue/apzem-india-engineering-tirumullaivayal-chennai-industrial-blower-dealers-jl1xi4l2rh.jpg?temp=1" alt="Logo">
-    <h1>Quiz</h1>
   </div>
   <div id="quiz-container"></div>
   <div class="submit-button">
     <button onclick="submitQuiz()">Submit</button>
   </div>
+  <div class="timer" id="timer">2:00</div>
 
   <script>
     // Replace with your Google Sheets API key and spreadsheet ID
@@ -151,10 +155,10 @@
           <h3>Question ${index + 1}:</h3>
           <p>${question.question}</p>
           <ul class="options">
-            ${question.options.map(option => `
+            ${question.options.map((option, optionIndex) => `
               <li onclick="selectOption(${index}, '${option}')">
-                <input type="radio" name="answer-${index}" value="${option}" id="answer-${index}-${option}">
-                <label for="answer-${index}-${option}">${option}</label>
+                <input type="radio" name="answer-${index}" value="${option}" id="answer-${index}-${optionIndex}">
+                <label for="answer-${index}-${optionIndex}">${String.fromCharCode(65 + optionIndex)}. ${option}</label>
               </li>
             `).join('')}
           </ul>
@@ -206,10 +210,30 @@
       window.location.href = `result.html?score=${score}&total=${questions.length}`;
     }
 
+    // Timer countdown
+    const timerElement = document.getElementById('timer');
+    let timeLeft = 120; // 2 minutes
+
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+      if (timeLeft === 0) {
+        clearInterval(timerInterval);
+        alert('Your time is up!');
+      }
+
+      timeLeft--;
+    }
+
     // Fetch random questions and display them on the webpage
     fetchRandomQuestions()
       .then(questions => displayQuestions(questions))
       .catch(error => console.error('Error:', error));
+
+    // Start the timer
+    const timerInterval = setInterval(updateTimer, 1000);
   </script>
 </body>
 </html>
