@@ -200,8 +200,7 @@
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];
         const correctAnswer = question.dataset.correctAnswer;
-       
-        
+
         if (userAnswers[i] === correctAnswer) {
           score++;
         }
@@ -211,30 +210,35 @@
       window.location.href = `result.html?score=${score}&total=${questions.length}`;
     }
 
-    // Timer countdown
-    const timerElement = document.getElementById('timer');
-    let timeLeft = 120; // 2 minutes
-
+    // Function to update the timer
     function updateTimer() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      const timerElement = document.getElementById('timer');
+      let timeLeft = 120; // 2 minutes
 
-      if (timeLeft === 0) {
-        clearInterval(timerInterval);
-        alert('Your time is up!');
-      }
+      const timer = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
 
-      timeLeft--;
+        seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+        timerElement.textContent = `${minutes}:${seconds}`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          timerElement.textContent = 'Time up!';
+          submitQuiz();
+        }
+
+        timeLeft--;
+      }, 1000);
     }
 
-    // Fetch random questions and display them on the webpage
-    fetchRandomQuestions()
-      .then(questions => displayQuestions(questions))
-      .catch(error => console.error('Error:', error));
-
-    // Start the timer
-    const timerInterval = setInterval(updateTimer, 1000);
+    // Fetch random questions and start the timer when the page loads
+    window.onload = () => {
+      fetchRandomQuestions().then(displayQuestions);
+      updateTimer();
+    };
   </script>
 </body>
 </html>
+
