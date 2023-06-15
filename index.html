@@ -173,6 +173,12 @@
 
     // Function to handle the selection of an option
     function selectOption(questionIndex, option) {
+    const submitButton = document.querySelector('.submit-button button');
+  
+  // Check if the submit button is disabled, indicating the quiz has been submitted
+  if (submitButton.disabled) {
+    return;
+  }
       const selectedOption = document.getElementById(`answer-${questionIndex}-${option}`);
       const questionElement = selectedOption.closest('.question');
       const options = questionElement.querySelectorAll('.options li');
@@ -191,47 +197,74 @@
 
     // Function to handle the submission of the quiz
     function submitQuiz() {
-      const quizContainer = document.getElementById('quiz-container');
-      const questions = quizContainer.getElementsByClassName('question');
+  const quizContainer = document.getElementById('quiz-container');
+  const questions = quizContainer.getElementsByClassName('question');
 
-      let score = 0;
+  let score = 0;
 
-      // Loop through each question
-      for (let i = 0; i < questions.length; i++) {
-        const question = questions[i];
-        const correctAnswer = question.dataset.correctAnswer;
+  // Loop through each question
+  for (let i = 0; i < questions.length; i++) {
+    const question = questions[i];
+    const correctAnswer = question.dataset.correctAnswer;
 
-        if (userAnswers[i] === correctAnswer) {
-          score++;
-        }
-      }
-
-      // Redirect to the result page with the score as a URL parameter
-      window.location.href = `result.html?score=${score}&total=${questions.length}`;
+    if (userAnswers[i] === correctAnswer) {
+      score++;
     }
+  }
+
+  // Create a pop-up window to display the result
+  const resultText = `Your score: ${score}/${questions.length}`;
+  const resultPopup = window.open('', 'Quiz Result', 'width=400,height=200');
+  resultPopup.document.write(`
+    <html>
+      <head>
+        <title>Quiz Result</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Quiz Result</h1>
+        <p>${resultText}</p>
+        <p>Thank you for taking the quiz!</p>
+      </body>
+    </html>
+  `);
+
+  // Disable the submit button after submission
+  const submitButton = document.querySelector('.submit-button button');
+  submitButton.disabled = true;
+}
 
     // Function to update the timer
     function updateTimer() {
-      const timerElement = document.getElementById('timer');
-      let timeLeft = 120; // 2 minutes
+  const timerElement = document.getElementById('timer');
+  let timeLeft = 120; // 2 minutes
 
-      const timer = setInterval(() => {
-        const minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
+  const timer = setInterval(() => {
+    const minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
 
-        seconds = seconds < 10 ? `0${seconds}` : seconds;
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
 
-        timerElement.textContent = `${minutes}:${seconds}`;
+    timerElement.textContent = `${minutes}:${seconds}`;
 
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          timerElement.textContent = 'Time up!';
-          submitQuiz();
-        }
-
-        timeLeft--;
-      }, 1000);
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      timerElement.textContent = 'Time up!';
+      submitQuiz();
+      setTimeout(() => {
+        window.close(); // Close the window after 2 seconds
+      }, 2000);
     }
+
+    timeLeft--;
+  }, 1000);
+}
 
     // Fetch random questions and start the timer when the page loads
     window.onload = () => {
@@ -241,4 +274,3 @@
   </script>
 </body>
 </html>
-
