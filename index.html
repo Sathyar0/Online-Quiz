@@ -196,7 +196,9 @@
     }
 
     // Function to handle the submission of the quiz
-    function submitQuiz() {
+    // Function to handle the submission of the quiz
+// Function to handle the submission of the quiz
+function submitQuiz() {
   const quizContainer = document.getElementById('quiz-container');
   const questions = quizContainer.getElementsByClassName('question');
 
@@ -212,36 +214,27 @@
     }
   }
 
-  // Create a pop-up window to display the result
+  // Display the result on the page
   const resultText = `Your score: ${score}/${questions.length}`;
-  const resultPopup = window.open('', 'Quiz Result', 'width=400,height=200');
-  resultPopup.document.write(`
-    <html>
-      <head>
-        <title>Quiz Result</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        <h1>Quiz Result</h1>
-        <p>${resultText}</p>
-        <p>Thank you for taking the quiz!</p>
-      </body>
-    </html>
-  `);
+  const resultElement = document.createElement('div');
+  resultElement.innerHTML = `
+    <h1>Quiz Result</h1>
+    <p>${resultText}</p>
+    <p>Thank you for taking the quiz!</p>
+  `;
 
-  // Disable the submit button after submission
-  const submitButton = document.querySelector('.submit-button button');
-  submitButton.disabled = true;
+  // Remove the quiz questions, submit button, and timer
+  quizContainer.innerHTML = '';
+  quizContainer.appendChild(resultElement);
+  const submitButton = document.querySelector('.submit-button');
+  submitButton.style.display = 'none';
+  const timerElement = document.getElementById('timer');
+  timerElement.style.display = 'none';
 }
 
     // Function to update the timer
-    function updateTimer() {
+   // Function to update the timer
+function updateTimer() {
   const timerElement = document.getElementById('timer');
   let timeLeft = 120; // 2 minutes
 
@@ -257,14 +250,12 @@
       clearInterval(timer);
       timerElement.textContent = 'Time up!';
       submitQuiz();
-      setTimeout(() => {
-        window.close(); // Close the window after 2 seconds
-      }, 2000);
     }
 
     timeLeft--;
   }, 1000);
 }
+
 
     // Fetch random questions and start the timer when the page loads
     window.onload = () => {
