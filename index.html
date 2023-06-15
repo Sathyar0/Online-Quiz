@@ -235,6 +235,9 @@ function submitQuiz() {
     <p>${resultText}</p>
     <p>Thank you for taking the quiz!</p>
   `;
+      resultElement.style.fontSize = '36px';
+      resultElement.style.color = '#fff';
+      resultElement.style.fontWeight = 'bold';
 
   // Remove the quiz questions, submit button, and timer
   quizContainer.innerHTML = '';
