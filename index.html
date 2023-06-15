@@ -145,31 +145,44 @@
     }
 
     // Function to display the fetched questions on the webpage
-    function displayQuestions(questions) {
-      const quizContainer = document.getElementById('quiz-container');
+    // Function to display the fetched questions on the webpage
+function displayQuestions(questions) {
+  const quizContainer = document.getElementById('quiz-container');
 
-      questions.forEach((question, index) => {
-        const questionElement = document.createElement('div');
-        questionElement.className = 'question';
-        questionElement.innerHTML = `
-          <h3>Question ${index + 1}:</h3>
-          <p>${question.question}</p>
-          <ul class="options">
-            ${question.options.map(option => `
-              <li onclick="selectOption(${index}, '${option}')">
-                <input type="radio" name="answer-${index}" value="${option}" id="answer-${index}-${option}">
-                <label for="answer-${index}-${option}">${option}</label>
-              </li>
-            `).join('')}
-          </ul>
-        `;
+  questions.forEach((question, index) => {
+    const questionElement = document.createElement('div');
+    questionElement.className = 'question';
+    questionElement.innerHTML = `
+      <h3>Question ${index + 1}:</h3>
+      <p>${question.question}</p>
+      <ul class="options">
+        ${question.options.map(option => `
+          <li onclick="selectOption(${index}, '${option}')">
+            <input type="radio" name="answer-${index}" value="${option}" id="answer-${index}-${option}">
+            <label for="answer-${index}-${option}">${option}</label>
+          </li>
+        `).join('')}
+      </ul>
+    `;
 
-        // Add the correct answer data attribute to the question element
-        questionElement.dataset.correctAnswer = question.correctAnswer;
+    // Add the correct answer data attribute to the question element
+    questionElement.dataset.correctAnswer = question.correctAnswer;
 
-        quizContainer.appendChild(questionElement);
+    // Highlight the correct answer if already submitted
+    if (userAnswers[index] === question.correctAnswer) {
+      const options = questionElement.querySelectorAll('.options li');
+      options.forEach(optionElement => {
+        if (optionElement.querySelector('input').value === question.correctAnswer) {
+          optionElement.style.backgroundColor = '#4caf50';
+          optionElement.style.color = '#fff';
+        }
       });
     }
+
+    quizContainer.appendChild(questionElement);
+  });
+}
+
 
     // Function to handle the selection of an option
     function selectOption(questionIndex, option) {
@@ -218,7 +231,7 @@ function submitQuiz() {
   const resultText = `Your score: ${score}/${questions.length}`;
   const resultElement = document.createElement('div');
   resultElement.innerHTML = `
-    <h1>Quiz Result</h1>
+    <h2>Quiz Result</h2>
     <p>${resultText}</p>
     <p>Thank you for taking the quiz!</p>
   `;
